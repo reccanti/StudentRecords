@@ -1,0 +1,15 @@
+{
+  "name": "StudentRecords",
+  "version": "0.0.1",
+  "description": "A server that retrieves student records from a database",
+  "main": "index.js",
+  "repository": "git@github.com:reccanti/StudentRecords.git",
+  "author": "Ben Wilcox <reccanti@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "compile": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^2.2.2"
+  }
+}

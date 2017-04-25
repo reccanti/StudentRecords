@@ -1,1 +1,3 @@
-console.log("hello world");
+import '../.env';
+
+console.log(process.env);

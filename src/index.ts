@@ -1,3 +1,5 @@
 import '../.env';
+import createClient from './database';
 
-console.log(process.env);
+const client = createClient();
+console.log(client);

@@ -14,7 +14,6 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
-    "@types/mariasql": "^0.1.28",
     "mariasql": "^0.2.6"
   }
 }

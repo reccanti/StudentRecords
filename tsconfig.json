@@ -3,7 +3,9 @@
         "target": "es2015",
         "outDir": "dist",
         "module": "commonjs",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "noImplicitReturns": true
     },
     "include": [
         "src/**/*.ts"

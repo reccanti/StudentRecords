@@ -7,10 +7,16 @@
   "author": "Ben Wilcox <reccanti@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "compile": "tsc"
+    "compile": "tsc",
+    "test": "mocha --compilers ts:ts-node/register --recursive test/**/*.ts"
   },
   "devDependencies": {
+    "@types/chai": "^3.5.1",
+    "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.13",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "ts-node": "^3.0.2",
     "typescript": "^2.2.2"
   },
   "dependencies": {

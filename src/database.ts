@@ -1,8 +1,8 @@
 import * as knex from 'knex';
 
 /**
- * A function that creates a client with our given
- * settings to connect to and access our database
+ * Initialize our knex. This can be used reused
+ * throughout the app
  */
 const client = knex({
     dialect: 'mariadb',

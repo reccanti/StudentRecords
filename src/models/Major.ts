@@ -17,10 +17,13 @@ class Major {
     /**
      * An async function that queries the database to get all
      * of the records associated with the given query
+     * 
+     * @param whereOptions - options that can be used to filter
+     * the results returned by the knex client
      */
-    static async get(): Promise<Major[]> {
+    static async get(whereOptions: object = {}): Promise<Major[]> {
         try {
-            const majorsRecords = await client.select().from('Major').then((data) => data);
+            const majorsRecords = await client.select().from('Major').where(whereOptions).then((data) => data);
             const majors = majorsRecords.map( major => {
                 return new Major(major.id, major.Name);
             });

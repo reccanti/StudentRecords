@@ -3,6 +3,6 @@ import '../.env';
 import Major from './models/Major';
 
 // const client = createClient();
-Major.get().then( majors => {
+Major.get({ Value: 1 }).then( majors => {
     console.log(majors);
 });

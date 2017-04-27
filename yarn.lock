@@ -464,20 +464,9 @@ lodash@^4.6.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-lru-cache@^2.7.0:
-  version "2.7.3"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
-
 make-error@^1.1.1:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.2.3.tgz#6c4402df732e0977ac6faf754a5074b3d2b1d19d"
-
-mariasql@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/mariasql/-/mariasql-0.2.6.tgz#ab78b0671172f0eaf4e80ddad029b803f35cf77a"
-  dependencies:
-    lru-cache "^2.7.0"
-    nan "^2.0.9"
 
 micromatch@^2.3.7:
   version "2.3.11"
@@ -544,10 +533,6 @@ ms@0.7.2:
 ms@0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
-
-nan@^2.0.9:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
 normalize-path@^2.0.1:
   version "2.1.1"

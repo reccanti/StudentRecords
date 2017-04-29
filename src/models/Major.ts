@@ -23,7 +23,7 @@ class Major {
      */
     static async get(whereOptions: object = {}): Promise<Major[]> {
         try {
-            const majorsRecords = await client.select().from('Major').where(whereOptions).then((data) => data);
+            const majorsRecords = await client.select().from('Major').where(whereOptions);
             const majors = majorsRecords.map( major => {
                 return new Major(major.id, major.Name);
             });

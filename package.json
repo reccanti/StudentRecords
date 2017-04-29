@@ -10,7 +10,7 @@
     "compile": "tsc",
     "test": "NODE_ENV=TEST mocha --compilers ts:ts-node/register --recursive test/**/*.ts",
     "test:cover": "nyc --reporter=html -x **/*.spec.ts npm test",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
     "@types/chai": "^3.5.1",

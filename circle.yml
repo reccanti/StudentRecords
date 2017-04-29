@@ -5,3 +5,11 @@ machine:
 dependencies:
   override:
     - npm install --dev
+
+general:
+  artifacts:
+    - ./coverage
+
+test:
+  override:
+    - npm run test:cover

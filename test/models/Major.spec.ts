@@ -17,16 +17,16 @@ describe('Major', function() {
 
     it('should initialize a new Major correctly', function () {
         const major = new Major(1, 'Test Major');
-        expect(major.id).to.equal(1);
-        expect(major.name).to.equal('Test Major');
+        expect(major.id).to.equal(1, 'retrieves the correct ID');
+        expect(major.name).to.equal('Test Major', 'retrieves the correct name');
     });
 
     it('should retrieve a Promise that resolves to an array of Majors', function(done) {
         const majorsPromise = Major.get();
-        expect(majorsPromise).to.be.a('promise');
+        expect(majorsPromise).to.be.a('promise', 'returns a promise');
         majorsPromise.then(function (majors) {
-            expect(majors).to.be.an('array');
-            expect(majors.length).equals(4);
+            expect(majors).to.be.an('array', 'promise resolves to an array');
+            expect(majors.length).equals(4, 'array is of the correct size');
             done();
         });
     });

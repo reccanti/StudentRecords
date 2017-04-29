@@ -1,1 +1,1 @@
-[![CircleCI](https://circleci.com/gh/reccanti/StudentRecords.svg?style=svg)](https://circleci.com/gh/reccanti/StudentRecords)
+[![CircleCI](https://circleci.com/gh/reccanti/StudentRecords.svg?style=svg)](https://circleci.com/gh/reccanti/StudentRecords) [![Coverage Status](https://coveralls.io/repos/github/reccanti/StudentRecords/badge.svg?branch=master)](https://coveralls.io/github/reccanti/StudentRecords?branch=master)

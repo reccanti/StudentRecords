@@ -1,7 +1,13 @@
 import 'mocha';
-import { expect } from 'chai';
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
 import client from '../../src/database';
 import Major from '../../src/models/Major';
+
+// initialize chai
+chai.use(chaiAsPromised);
+const expect = chai.expect;
 
 describe('Major', function() {
 
@@ -13,6 +19,7 @@ describe('Major', function() {
             { id: '3', Name: 'Computer Science' },
             { id: '4', Name: 'Information Technology' },
         ]);
+        client.shouldThrowError = false;
     });
 
     it('should initialize a new Major correctly', function () {
@@ -29,5 +36,15 @@ describe('Major', function() {
             expect(majors.length).equals(4, 'array is of the correct size');
             done();
         });
+    });
+
+    it('should throw an error if it was unable to retrieve data from the database', function() {
+        
+        // setup an error message
+        client.shouldThrowError = true;
+        client.errorMessage = "test error message";
+
+        // test the error handling
+        expect(Major.get()).to.eventually.be.rejectedWith(client.errorMessage);
     });
 });

@@ -17,6 +17,7 @@
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.13",
     "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "coveralls": "^2.13.1",
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
@@ -24,7 +25,8 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
-    "knex": "^0.12.9"
+    "knex": "^0.12.9",
+    "mariasql": "^0.2.6"
   },
   "nyc": {
     "include": [

@@ -31,12 +31,15 @@ else {
     class MockClient {
 
         data: object[];
+        shouldThrowError: boolean;
+        errorMessage: "";
 
         /**
          * Initializes the MockClient with empty data
          */
         constructor() {
             this.data = [];
+            this.shouldThrowError = false;
         }
         
         /**
@@ -50,16 +53,30 @@ else {
             this.data = data;
         }
 
-        select () {
+        /**
+         * Mocks the select function. Simply returns the client instance
+         */
+        select (): MockClient {
             return this;
         }
 
-        from () {
+        /**
+         * Mocks the from function. Simply returns the client instance
+         */
+        from (): MockClient {
             return this;
         }
 
-        where () {
-            return Promise.resolve(this.data);
+        /**
+         * Mocks the where function. Returns a promise with the data
+         * or throws an error 
+         */
+        where (): Promise<object[]> {
+            if (this.shouldThrowError) {
+                throw Error(this.errorMessage);
+            } else {
+                return Promise.resolve(this.data);
+            }
         }
 
 

@@ -1,6 +1,15 @@
 import client from '../database';
 
 /**
+ * An interface that describes the different
+ * parameters that can be used to search the database
+ */
+interface IMajorQueryParams {
+    id?: string;
+    name?: string;
+}
+
+/**
  * A class that represents records in the 'Major'
  * database table
  */
@@ -21,13 +30,10 @@ class Major {
      * @param whereOptions - options that can be used to filter
      * the results returned by the knex client
      */
-    static async get(whereOptions: object = {}): Promise<Major[]> {
+    static async get(whereOptions:IMajorQueryParams = {}): Promise<Major[]> {
         try {
             const majorsRecords = await client.select().from('Major').where(whereOptions);
-            const majors = majorsRecords.map( major => {
-                return new Major(major.id, major.Name);
-            });
-            return majors;
+            return majorsRecords.map( major => new Major(major.id, major.Name));
         } catch (err) {
             throw err;
         }

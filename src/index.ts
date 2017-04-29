@@ -1,8 +1,18 @@
 import '../.env';
-// import createClient from './database';
-import Major from './models/Major';
 
-// const client = createClient();
-Major.get({ value: 1 }).then( majors => {
-    console.log(majors);
-}).catch( err => { console.log(err); });
+import * as Koa from 'koa';
+import * as Router from 'koa-router';
+
+const app = new Koa();
+const router = new Router();
+
+router.get('home', '/', async function homeRoute(ctx: Koa.Context, next: () => Promise<any>) {
+    ctx.body = 'Got it!!!!';
+    console.log(ctx);
+    next();
+});
+
+app.use(router.routes())
+   .use(router.allowedMethods());
+
+app.listen(3000);

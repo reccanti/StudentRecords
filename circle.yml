@@ -6,6 +6,11 @@ dependencies:
   override:
     - npm install --dev
 
+general:
+  artifacts:
+    - ./coverage
+    - ./nyc_output
+
 test:
   override:
     - npm run coverage

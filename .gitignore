@@ -60,3 +60,6 @@ typings/
 
 # compiled files
 dist
+
+# tokens and secure info
+.coveralls.yml

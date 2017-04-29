@@ -31,7 +31,6 @@ class Major {
         } catch (err) {
             throw err;
         }
-        
     }
 }
 

@@ -1,6 +1,5 @@
 const chai = require('chai');
 const request = require('supertest');
-// import request from 'supertest';
 
 import client from '../../src/database';
 import app from '../../src/server';

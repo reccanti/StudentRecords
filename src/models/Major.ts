@@ -6,7 +6,7 @@ import client from '../database';
  */
 interface IMajorQueryParams {
     id?: number;
-    name?: string;
+    Name?: string;
 }
 
 /**

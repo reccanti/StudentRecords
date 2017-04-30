@@ -1,6 +1,7 @@
 const chai = require('chai');
 const request = require('supertest');
 
+import isRealValue from '../../test_helpers/isRealValue';
 import client from '../../src/database';
 import app from '../../src/server';
 
@@ -26,10 +27,10 @@ describe('Student Routes', function () {
                 .end(function (err, res) {
                     let student = res.body;
                     expect(student).to.be.an('object');
-                    expect(student.id).to.not.be.null;
-                    expect(student.first).to.not.be.null;
-                    expect(student.last).to.not.be.null;
-                    expect(student.major_id).to.not.be.null;
+                    isRealValue(student.id);
+                    isRealValue(student.first);
+                    isRealValue(student.last);
+                    isRealValue(student.major_id);
                     done();
                 });
         });
@@ -83,10 +84,10 @@ describe('Student Routes', function () {
                     expect(students.length).to.equal(11);
 
                     // test that the type of data is well-formed
-                    expect(students[0].id).to.not.be.null;
-                    expect(students[0].first).to.not.be.null;
-                    expect(students[0].last).to.not.be.null;
-                    expect(students[0].major_id).to.not.be.null;
+                    isRealValue(students[0].id);
+                    isRealValue(students[0].first);
+                    isRealValue(students[0].last);
+                    isRealValue(students[0].major_id);
                     done()
                 });
         });

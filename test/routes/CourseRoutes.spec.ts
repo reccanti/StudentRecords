@@ -1,6 +1,7 @@
 const chai = require('chai');
 const request = require('supertest');
 
+import isRealValue from '../../test_helpers/isRealValue';
 import client from '../../src/database';
 import app from '../../src/server';
 
@@ -26,9 +27,9 @@ describe('Course Routes', function () {
                 .end(function (err, res) {
                     let course = res.body;
                     expect(course).to.be.an('object');
-                    expect(course.id).to.not.be.null;
-                    expect(course.name).to.not.be.null;
-                    expect(course.major_id).to.not.be.null;
+                    isRealValue(course.id);
+                    isRealValue(course.name);
+                    isRealValue(course.major_id);
                     done();
                 });
         });
@@ -80,9 +81,9 @@ describe('Course Routes', function () {
                     expect(courses.length).to.equal(8);
 
                     // test that the data in the array is well formed
-                    expect(courses[0].id).to.not.be.null;
-                    expect(courses[0].name).to.not.be.null;
-                    expect(courses[0].major_id).to.not.be.null;
+                    isRealValue(courses[0].id);
+                    isRealValue(courses[0].name);
+                    isRealValue(courses[0].major_id);
                     done();
                 });
         });

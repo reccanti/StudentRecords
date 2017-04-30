@@ -1,4 +1,5 @@
 import client from '../database';
+import Course from './Course';
 
 /**
  * An interface that describes the different 
@@ -67,6 +68,19 @@ export default class Student implements IStudent {
         try {
             const studentRecords = await client.select().from('Student').where(whereOptions);
             return studentRecords.map( student => new Student(student.id, student.first, student.last, student.major_id));
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    /**
+     * Get all of the courses that are available for the given 
+     * student to take according to their major
+     */
+    async availableCourses(): Promise<Course[]> {
+        try {
+            console.log(this.major_id);
+            return await Course.get({ Major_id: this.major_id });
         } catch (err) {
             throw err;
         }

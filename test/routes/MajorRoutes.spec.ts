@@ -1,6 +1,7 @@
 const chai = require('chai');
 const request = require('supertest');
 
+import isRealValue from '../../test_helpers/isRealValue';
 import client from '../../src/database';
 import app from '../../src/server';
 
@@ -26,8 +27,8 @@ describe('Major Routes', function () {
                 .end(function (err, res) {
                     let major = res.body;
                     expect(major).to.be.an('object');
-                    expect(major.id).not.to.be.a('null');
-                    expect(major.name).not.to.be.a('null');
+                    isRealValue(major.id);
+                    isRealValue(major.name);
                     done(); 
                 });
         });
@@ -71,8 +72,8 @@ describe('Major Routes', function () {
                     const majors = res.body;
                     expect(majors).to.be.an('array');
                     expect(majors.length).to.equal(4);
-                    expect(majors[0].id).not.to.be.a('null');
-                    expect(majors[0].name).not.to.be.a('null');
+                    isRealValue(majors[0].id);
+                    isRealValue(majors[0].name);
                     done();
                 });
         });

@@ -5,7 +5,7 @@ import client from '../database';
  * parameters that can be used to search the database
  */
 interface IMajorQueryParams {
-    id?: string;
+    id?: number;
     name?: string;
 }
 

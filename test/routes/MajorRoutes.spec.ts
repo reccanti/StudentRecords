@@ -43,10 +43,39 @@ describe('Major Routes', function () {
             request(app.listen())
                 .get('/api/major/1')
                 .expect(404)
+                .expect('Content-Type', /json/)
                 .end(function (err, res) {
                     done();
                 });
         });
 
     });
+
+    describe('getAll', function () {
+        it('should return an array of all majors in the database', function (done) {
+
+            // setup the client        
+            client.setData([ 
+                { id: '1', Name: 'Software Engineering' },
+                { id: '2', Name: 'New Media' },
+                { id: '3', Name: 'Computer Science' },
+                { id: '4', Name: 'Information Technology' },
+            ]);
+            client.shouldThrowError = false;
+
+            // test the response
+            request(app.listen())
+                .get('/api/major')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end(function (err, res) {
+                    const majors = res.body;
+                    expect(majors).to.be.an('array');
+                    expect(majors.length).to.equal(4);
+                    expect(majors[0].id).not.to.be.a('null');
+                    expect(majors[0].name).not.to.be.a('null');
+                    done();
+                });
+        });
+    })
 });

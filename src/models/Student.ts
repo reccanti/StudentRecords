@@ -67,7 +67,7 @@ export default class Student implements IStudent {
     static async get(whereOptions: IStudentQueryParams = {}): Promise<Student[]> {
         try {
             const studentRecords = await client.select().from('Student').where(whereOptions);
-            return studentRecords.map( student => new Student(student.id, student.first, student.last, student.major_id));
+            return studentRecords.map( student => new Student(student.id, student.First, student.Last, student.Major_id));
         } catch (err) {
             throw err;
         }

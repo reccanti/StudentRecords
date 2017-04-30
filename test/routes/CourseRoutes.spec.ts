@@ -1,0 +1,91 @@
+const chai = require('chai');
+const request = require('supertest');
+
+import client from '../../src/database';
+import app from '../../src/server';
+
+const expect = chai.expect;
+
+describe('Course Routes', function () {
+
+    describe('getById', function () {
+
+        it('should return a single course if it exists', function (done) {
+
+            // setup the Client
+            client.setData([ 
+                { id: '1', Name: 'Design Patterns', Major_id: '1' }
+            ]);
+            client.shouldThrowError = false;
+
+            // test the response
+            request(app.listen())
+                .get('/api/course/1')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end(function (err, res) {
+                    let course = res.body;
+                    expect(course).to.be.an('object');
+                    expect(course.id).to.not.be.null;
+                    expect(course.name).to.not.be.null;
+                    expect(course.major_id).to.not.be.null;
+                    done();
+                });
+        });
+
+        it('should return a 404 if the course was not found', function (done) {
+            
+            // setup the Client
+            client.setData([]);
+            client.shouldThrowError = false;
+
+            // test the response
+            request(app.listen())
+                .get('/api/course/1')
+                .expect(404)
+                .expect('Content-Type', /json/)
+                .end(function (err, res) {
+                    done();
+                });
+        })
+    });
+
+    describe('getAll', function () {
+
+        it('should return an array of all courses in the database', function (done) {
+            
+            // setup the Client
+            client.setData([ 
+                { id: '1', Name: 'Design Patterns', Major_id: '1' },
+                { id: '2', Name: 'Software Architecture', Major_id: '1' },
+                { id: '3', Name: 'Rich Media', Major_id: '2' },
+                { id: '4', Name: 'Data Visualization', Major_id: '2' },
+                { id: '5', Name: 'Compilers', Major_id: '3' },
+                { id: '6', Name: 'Data Structures', Major_id: '3' },
+                { id: '7', Name: 'Web & Mobile', Major_id: '4' },
+                { id: '8', Name: 'User Experience', Major_id: '4' }
+            ]);
+            client.shouldThrowError = false;
+
+            // test the response
+            request(app.listen())
+                .get('/api/course')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end(function (err, res) {
+                    const courses = res.body;
+
+                    // test that this is the correct array of data
+                    expect(courses).to.be.an('array');
+                    expect(courses.length).to.equal(8);
+
+                    // test that the data in the array is well formed
+                    expect(courses[0].id).to.not.be.null;
+                    expect(courses[0].name).to.not.be.null;
+                    expect(courses[0].major_id).to.not.be.null;
+                    done();
+                });
+        });
+
+    });
+});

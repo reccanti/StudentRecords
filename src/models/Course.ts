@@ -51,7 +51,7 @@ class Course implements ICourse {
      */
     static async get(whereOptions:ICourseQueryParams = {}): Promise<Course[]> {
         try {
-            const courseRecords = await client.select().from('Course').where(whereOptions);
+            const courseRecords = await client.select().from('Courses').where(whereOptions);
             return courseRecords.map( course => new Course(course.id, course.Name, course.major_id));
         } catch (err) {
             throw err;

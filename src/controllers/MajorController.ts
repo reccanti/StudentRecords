@@ -17,7 +17,7 @@ namespace MajorController {
             ctx.body = retrievedMajors[0];
         } else {
             ctx.status = 404;
-            ctx.message = "record not found"
+            ctx.message = "record not found";
         }
     }
 

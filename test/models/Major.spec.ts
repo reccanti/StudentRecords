@@ -1,6 +1,7 @@
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
+import isRealValue from '../../test_helpers/isRealValue';
 import client from '../../src/database';
 import Major from '../../src/models/Major';
 
@@ -33,8 +34,13 @@ describe('Major', function() {
         majorsPromise.then(function (majors) {
             expect(majors).to.be.an('array', 'promise resolves to an array');
             expect(majors.length).equals(4, 'array is of the correct size');
+
+            // test that the data is well-formed
+            isRealValue(majors[0].id);
+            isRealValue(majors[0].name);
+
             done();
-        });
+        }).catch(done);
     });
 
     it('should throw an error if it was unable to retrieve data from the database', function() {

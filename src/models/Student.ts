@@ -79,7 +79,6 @@ export default class Student implements IStudent {
      */
     async availableCourses(): Promise<Course[]> {
         try {
-            console.log(this.major_id);
             return await Course.get({ Major_id: this.major_id });
         } catch (err) {
             throw err;

@@ -16,11 +16,13 @@
     "@types/chai": "^3.5.1",
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.13",
+    "@types/supertest": "^2.0.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "coveralls": "^2.13.1",
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
+    "supertest": "^3.0.0",
     "ts-node": "^3.0.2",
     "typescript": "^2.2.2"
   },

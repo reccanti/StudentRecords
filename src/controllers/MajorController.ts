@@ -13,7 +13,12 @@ namespace MajorController {
      */
     export async function getById(ctx: Koa.Context) {
         const retrievedMajors: Major[] = await Major.get({ id: ctx.params.id });
-        ctx.major = retrievedMajors[0];
+        if (retrievedMajors.length > 0) {
+            ctx.body = retrievedMajors[0];
+        } else {
+            ctx.status = 404;
+            ctx.message = "record not found"
+        }
     }
 
     /**
@@ -22,7 +27,7 @@ namespace MajorController {
      * @param ctx - the context of the koa function
      */
     export async function getAll(ctx: Koa.Context) {
-        ctx.majors = await Major.get();
+        ctx.body = await Major.get();
     }
 }
 

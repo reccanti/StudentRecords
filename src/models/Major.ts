@@ -10,10 +10,18 @@ interface IMajorQueryParams {
 }
 
 /**
+ * An interface that defines the shape of a Major object
+ */
+interface IMajor {
+    id: number;
+    name: string;
+}
+
+/**
  * A class that represents records in the 'Major'
  * database table
  */
-class Major {
+class Major implements IMajor {
 
     /**
      * Initializes the Major with a name and ID
@@ -22,6 +30,14 @@ class Major {
      * @param name - the name of the Major in the database
      */
     constructor (public id: number, public name: string) {}
+
+    /**
+     * Export this data to a static JSON format that conforms
+     * to the IMajor interface
+     */
+    toJSON(): IMajor {
+        return { id: this.id, name: this.name }
+    }
 
     /**
      * An async function that queries the database to get all

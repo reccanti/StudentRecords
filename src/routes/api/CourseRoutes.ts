@@ -13,4 +13,9 @@ courseRoutes.get('/', CourseController.getAll);
  */
 courseRoutes.get('/:id', CourseController.getById);
 
+/**
+ * Retrieves the students enrolled in a given course
+ */
+courseRoutes.get('/:id/enrolledStudents', CourseController.getEnrolledStudents);
+
 export default courseRoutes;

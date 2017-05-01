@@ -22,11 +22,22 @@ namespace CourseController {
     }
 
     /**
+     * Retrieves all courses from the database
      * 
      * @param ctx - the Koa context of the middleware function
      */
     export async function getAll(ctx: Koa.Context) {
         ctx.body = await Course.get();
+    }
+
+    /**
+     * Retrieves all students enrolled in the given course
+     * 
+     * @param ctx - the Koa context of the middleware function
+     */
+    export async function getEnrolledStudents(ctx: Koa.Context) {
+        const retrievedCourses: Course[] = await Course.get({ id: ctx.params.id });
+        ctx.body = await retrievedCourses[0].getEnrolled();
     }
 }
 

@@ -81,7 +81,6 @@ describe('Student', function () {
             // test that it returns a promise that resolves to an array of courses
             const coursesPromise = student.availableCourses();
             expect(coursesPromise).to.be.a('promise');
-            
             coursesPromise.then(function (courses) {
 
                 expect(courses).to.be.an('array');

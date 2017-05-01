@@ -120,5 +120,11 @@ describe('Student Routes', function () {
                     });
             });
         });
+
+        describe('enrollInCourse', function() {
+            it('should throw an error if the student cannot enroll in the given course', function () {
+
+            });
+        });
     })
 });

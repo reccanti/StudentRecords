@@ -57,6 +57,10 @@ export default class Student implements IStudent {
         }
     }
 
+    canEnroll(course: Course): boolean {
+        return this.major_id == course.major_id;
+    }
+
     /**
      * An async function that queries the database to get all
      * of the records associated with the given query

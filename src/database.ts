@@ -1,4 +1,5 @@
 import * as knex from 'knex';
+import MockClient from '../test_helpers/MockClient';
 
 let client;
 
@@ -24,70 +25,6 @@ if (process.env['NODE_ENV'] != 'TEST') {
 
 // setup a mock database for testing
 else {
-
-    /**
-     * Simulates a knex client. To be used for testing
-     */
-    class MockClient {
-
-        data: object[];
-        shouldThrowError: boolean;
-        errorMessage: "";
-
-        /**
-         * Initializes the MockClient with empty data
-         */
-        constructor() {
-            this.data = [];
-            this.shouldThrowError = false;
-        }
-        
-        /**
-         * Set the data that the MockClient should return
-         * 
-         * @param data - an array of data objects that will be 
-         * returned by the function. Should mirror the data
-         * returned by knex
-         */
-        setData (data: object[]) {
-            this.data = data;
-        }
-
-        /**
-         * Mocks the select function. Simply returns the client instance
-         */
-        select (): MockClient {
-            return this;
-        }
-
-        /**
-         * Mocks the from function. Simply returns the client instance
-         */
-        from (): MockClient {
-            return this;
-        }
-
-        /**
-         * Mocks the from function. Returns the client instance
-         */
-        join (): MockClient {
-            return this;
-        }
-
-        /**
-         * Mocks the where function. Returns a promise with the data
-         * or throws an error 
-         */
-        where (): Promise<object[]> {
-            if (this.shouldThrowError) {
-                throw Error(this.errorMessage);
-            } else {
-                return Promise.resolve(this.data);
-            }
-        }
-
-
-    }
     client = new MockClient();
 }
 

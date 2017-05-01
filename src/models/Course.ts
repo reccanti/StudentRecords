@@ -1,4 +1,5 @@
 import client from '../database';
+import Student from './Student';
 
 /**
  * An interface that describes the different
@@ -40,6 +41,19 @@ class Course implements ICourse {
      */
     toJSON(): ICourse {
         return { id: this.id, name: this.name, major_id: this.id }
+    }
+
+    /**
+     * Get a list of students who are enrolled in the current course
+     */
+    async getEnrolled(): Promise<Student[]> {
+        const students = await client.select()
+            .from('Enrollment')
+            .join('Student', { 'Enrollment.Student_id':'Student.id' })
+            .where({ 'Enrollment.Courses_id': this.id });
+        return students.map( enrolled => {
+            return new Student(enrolled.Student_id, enrolled.First, enrolled.Last, enrolled.Major_id);
+        });
     }
 
     /**

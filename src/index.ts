@@ -2,12 +2,12 @@ import '../.env';
 import app from './server';
 
 // TEST
-import Student from './models/Student';
-Student.get({ id: 1 }).then( students => {
-    console.log(students);
-    return students[0].availableCourses();
-}).then(courses => {
-    console.log(courses);
-});
+// import Course from './models/Course';
+// Course.get({ id: 6 }).then( course => {
+//     console.log(course);
+//     return course[0].getEnrolled();
+// }).then( students => {
+//     console.log(students);
+// });
 
 app.listen(3000);

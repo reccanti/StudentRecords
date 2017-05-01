@@ -68,6 +68,13 @@ else {
         }
 
         /**
+         * Mocks the from function. Returns the client instance
+         */
+        join (): MockClient {
+            return this;
+        }
+
+        /**
          * Mocks the where function. Returns a promise with the data
          * or throws an error 
          */

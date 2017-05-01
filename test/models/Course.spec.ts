@@ -58,4 +58,49 @@ describe('Course', function() {
         expect(Course.get()).to.eventually.be.rejectedWith(client.errorMessage);
     });
 
+    describe('getEnrolled', function () {
+
+        it('should retrieve an array of students', function () {
+
+            // setup the database
+            client.setData([
+                { 
+                    Student_id: 2,
+                    Courses_id: 6,
+                    id: 2,
+                    First: 'Kenneth',
+                    Last: 'Kenny',
+                    Major_id: 3 
+                },
+                { 
+                    Student_id: 1,
+                    Courses_id: 6,
+                    id: 1,
+                    First: 'Vidit',
+                    Last: 'Organisciak',
+                    Major_id: 3 
+                }
+            ]);
+            client.shouldThrowError = false;
+
+            // initialize the Course
+            const course = new Course(6, 'Test Course', 3);
+
+            // test that it returns a promise that resolves to an array of students
+            const enrolledPromise = course.getEnrolled();
+            expect(enrolledPromise).to.be.a('promise');
+            enrolledPromise.then(function (students) {
+
+                expect(students).to.be.an('array');
+                expect(students.length).to.equal(2);
+
+                // test that the data is in the correct format
+                isRealValue(students[0].id);
+                isRealValue(students[0].first);
+                isRealValue(students[0].last);
+                isRealValue(students[0].major_id);
+            });
+        });
+    });
+
 });

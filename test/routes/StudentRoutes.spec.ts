@@ -91,5 +91,34 @@ describe('Student Routes', function () {
                     done()
                 });
         });
+
+        describe('getAvailableCourses', function () {
+            it('should return an array of all courses available to the given student', function (done) {
+                
+                // setup the database
+                client.setData([
+                    { id: '5', Name: 'Compilers', Major_id: '3' },
+                    { id: '6', Name: 'Data Structures', Major_id: '3' }
+                ]);
+                client.shouldThrowError = false;
+
+                request(app.listen())
+                    .get('/api/student/1/availableCourses')
+                    .expect(200)
+                    .expect('Content-Type', /json/)
+                    .end(function (err, res) {
+                        const courses = res.body;
+
+                        // test that the correct array was returned
+                        expect(courses).to.be.an('array');
+                        expect(courses.length).to.equal(2);
+
+                        // test that the type of data is well-formed
+                        isRealValue(courses[0].id);
+                        isRealValue(courses[0].name);
+                        done();
+                    });
+            });
+        });
     })
 });

@@ -13,4 +13,9 @@ studentRoutes.get('/', StudentController.getAll);
  */
 studentRoutes.get('/:id', StudentController.getById);
 
+/**
+ * Retrieves the courses available to the specific major
+ */
+studentRoutes.get('/:id/availableCourses', StudentController.getAvailableCourses);
+
 export default studentRoutes;

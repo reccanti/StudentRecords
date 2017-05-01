@@ -60,7 +60,7 @@ describe('Course', function() {
 
     describe('getEnrolled', function () {
 
-        it('should retrieve an array of students', function () {
+        it('should retrieve an array of students', function (done) {
 
             // setup the database
             client.setData([
@@ -99,7 +99,29 @@ describe('Course', function() {
                 isRealValue(students[0].first);
                 isRealValue(students[0].last);
                 isRealValue(students[0].major_id);
-            });
+                done();
+            }).catch(done);
+        });
+
+        it('should retrieve an empty array of students', function (done) {
+
+            // setup the database
+            client.setData([]);
+            client.shouldThrowError = false;
+
+            // initialize the Course
+            const course = new Course(6, 'Test Course', 3);
+
+            // test that it returns a promise that resolves to an array of students
+            const enrolledPromise = course.getEnrolled();
+            expect(enrolledPromise).to.be.a('promise');
+            enrolledPromise.then(function (students) {
+
+                expect(students).to.be.an('array');
+                expect(students.length).to.equal(0);
+                done();
+
+            }).catch(done);
         });
     });
 

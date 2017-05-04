@@ -3,7 +3,8 @@
  */
 export default class MockClient {
 
-    data: object[];
+    data: object;
+    constructedRecords: object[];
     shouldThrowError: boolean;
     errorMessage: "";
 
@@ -11,7 +12,8 @@ export default class MockClient {
      * Initializes the MockClient with empty data
      */
     constructor() {
-        this.data = [];
+        this.data = {};
+        this.constructedRecords = [];
         this.shouldThrowError = false;
     }
     
@@ -23,6 +25,7 @@ export default class MockClient {
      * returned by knex
      */
     setData (data: object[]) {
+        this.constructedRecords = [];
         this.data = data;
     }
 
@@ -30,6 +33,7 @@ export default class MockClient {
      * Mocks the select function. Simply returns the client instance
      */
     select (): MockClient {
+        this.constructedRecords = this.constructedRecords;
         return this;
     }
 
@@ -38,6 +42,7 @@ export default class MockClient {
      * only return data from the given function
      */
     from (table:string): MockClient {
+        this.constructedRecords = this.data[table];
         return this;
     }
 
@@ -56,7 +61,7 @@ export default class MockClient {
         if (this.shouldThrowError) {
             throw Error(this.errorMessage);
         } else {
-            return Promise.resolve(this.data);
+            return Promise.resolve(this.constructedRecords);
         }
     }
 }

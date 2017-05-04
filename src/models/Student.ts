@@ -57,6 +57,11 @@ export default class Student implements IStudent {
         }
     }
 
+    /**
+     * Checks to see if the current student can enroll in the specified course
+     * 
+     * @param course - The course we want to enroll in
+     */
     canEnroll(course: Course): boolean {
         return this.major_id == course.major_id;
     }

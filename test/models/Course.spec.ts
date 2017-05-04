@@ -13,29 +13,16 @@ describe('Course', function() {
 
     // setup the mock database
     beforeEach(function() {
-        // client.setData([ 
-        //     { id: '1', Name: 'Design Patterns', Major_id: '1' },
-        //     { id: '2', Name: 'Software Architecture', Major_id: '1' },
-        //     { id: '3', Name: 'Rich Media', Major_id: '2' },
-        //     { id: '4', Name: 'Data Visualization', Major_id: '2' },
-        //     { id: '5', Name: 'Compilers', Major_id: '3' },
-        //     { id: '6', Name: 'Data Structures', Major_id: '3' },
-        //     { id: '7', Name: 'Web & Mobile', Major_id: '4' },
-        //     { id: '8', Name: 'User Experience', Major_id: '4' }
-        // ]);
-
-        client.setData({
-            "Courses": [
-                { id: '1', Name: 'Design Patterns', Major_id: '1' },
-                { id: '2', Name: 'Software Architecture', Major_id: '1' },
-                { id: '3', Name: 'Rich Media', Major_id: '2' },
-                { id: '4', Name: 'Data Visualization', Major_id: '2' },
-                { id: '5', Name: 'Compilers', Major_id: '3' },
-                { id: '6', Name: 'Data Structures', Major_id: '3' },
-                { id: '7', Name: 'Web & Mobile', Major_id: '4' },
-                { id: '8', Name: 'User Experience', Major_id: '4' }
-            ]
-        });
+        client.setData([ 
+            { id: '1', Name: 'Design Patterns', Major_id: '1' },
+            { id: '2', Name: 'Software Architecture', Major_id: '1' },
+            { id: '3', Name: 'Rich Media', Major_id: '2' },
+            { id: '4', Name: 'Data Visualization', Major_id: '2' },
+            { id: '5', Name: 'Compilers', Major_id: '3' },
+            { id: '6', Name: 'Data Structures', Major_id: '3' },
+            { id: '7', Name: 'Web & Mobile', Major_id: '4' },
+            { id: '8', Name: 'User Experience', Major_id: '4' }
+        ]);
         client.shouldThrowError = false;
     });
 
@@ -76,35 +63,24 @@ describe('Course', function() {
         it('should retrieve an array of students', function (done) {
 
             // setup the database
-            // client.setData([
-            //     { 
-            //         Student_id: 2,
-            //         Courses_id: 6,
-            //         id: 2,
-            //         First: 'Kenneth',
-            //         Last: 'Kenny',
-            //         Major_id: 3 
-            //     },
-            //     { 
-            //         Student_id: 1,
-            //         Courses_id: 6,
-            //         id: 1,
-            //         First: 'Vidit',
-            //         Last: 'Organisciak',
-            //         Major_id: 3 
-            //     }
-            // ]);
-
-            client.setData({
-                "Enrollment": [
-                    { Student_id: 2, Courses_id: 6 },
-                    { Student_id: 1, Courses_id: 6 }
-                ],
-                "Student": [
-                    { id: 1, First: 'Vidit', Last: 'Organisciak', Major_id: 3 },
-                    { id: 2, First: 'Kenneth', Last: 'Kenny', Major_id: 3 },
-                ]
-            });
+            client.setData([
+                { 
+                    Student_id: 2,
+                    Courses_id: 6,
+                    id: 2,
+                    First: 'Kenneth',
+                    Last: 'Kenny',
+                    Major_id: 3 
+                },
+                { 
+                    Student_id: 1,
+                    Courses_id: 6,
+                    id: 1,
+                    First: 'Vidit',
+                    Last: 'Organisciak',
+                    Major_id: 3 
+                }
+            ]);
             client.shouldThrowError = false;
 
             // initialize the Course

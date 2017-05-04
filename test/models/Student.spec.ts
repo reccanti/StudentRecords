@@ -4,6 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 import isRealValue from '../../test_helpers/isRealValue';
 import client from '../../src/database';
 import Student from '../../src/models/Student';
+import Course from '../../src/models/Course';
 
 // initialize chai
 chai.use(chaiAsPromised);
@@ -93,6 +94,21 @@ describe('Student', function () {
                 done();
             }).catch(done);
         });
-    })
+    });
+
+    describe('canEnroll', function() {
+        
+        it ('should return true if the student has the required major id', function () {
+            const testStudent = new Student(1, 'Test First', 'Test Last', 1);
+            const testCourse = new Course(1, 'Test Course', 1);
+            expect(testStudent.canEnroll(testCourse)).to.be.true;
+        });
+        
+        it('should return false if the student does not have the required major id', function () {
+            const testStudent = new Student(1, 'Test First', 'Test Last', 1);
+            const testCourse = new Course(1, 'Test Course', 2);
+            expect(testStudent.canEnroll(testCourse)).to.be.false;
+        });
+    });
 
 });

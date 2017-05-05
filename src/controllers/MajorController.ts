@@ -28,7 +28,6 @@ namespace MajorController {
      * @param ctx - the context of the koa function
      */
     export async function getAll(ctx: Koa.Context, next: () => Promise<any>) {
-        console.log("Retrieving Majors...");
         ctx.body = await Major.get();
         await next();
     }

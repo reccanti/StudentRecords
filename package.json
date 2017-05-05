@@ -26,7 +26,6 @@
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
     "sinon": "^2.2.0",
-    "sinon-as-promised": "^4.0.3",
     "supertest": "^3.0.0",
     "ts-node": "^3.0.2",
     "typescript": "^2.2.2"

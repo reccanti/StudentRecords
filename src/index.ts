@@ -1,4 +1,4 @@
 import '../.env';
 import app from './server';
 
-app.listen(8080);
+app.listen(process.env.PORT);

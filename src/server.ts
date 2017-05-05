@@ -4,8 +4,6 @@ import * as bodyParser from 'koa-bodyparser';
 
 import routes from './routes';
 
-console.log(bodyParser);
-
 // initialize the server with routes
 const app = new Koa();
 app.use(routes.routes())

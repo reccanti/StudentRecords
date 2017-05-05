@@ -143,8 +143,8 @@ describe('Student Routes', function () {
                 request(app.listen())
                     .post('/api/student/enroll')
                     .send({ 
-                        "id": 1, 
-                        "course_id": 1 
+                        "id": "1", 
+                        "course_id": "1" 
                     })
                     .expect(405)
                     .expect('Content-Type', /json/)

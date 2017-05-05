@@ -12,7 +12,9 @@ namespace StudentController {
      * 
      * @param ctx - the context of the koa middleware function
      */
-    export async function getById(ctx: Koa.Context) {
+    export async function getById(ctx: Koa.Context, next: () => Promise<any>) {
+        await next();
+
         const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });
         if (retrievedStudents.length > 0) {
             ctx.body = retrievedStudents[0];
@@ -27,7 +29,9 @@ namespace StudentController {
      * 
      * @param ctx - the context of the koa middleware function
      */
-    export async function getAll(ctx: Koa.Context) {
+    export async function getAll(ctx: Koa.Context, next: () => Promise<any>) {
+        await next();
+
         ctx.body = await Student.get();
     }
 
@@ -36,7 +40,9 @@ namespace StudentController {
      * 
      * @param ctx - the context of the koa middleware function
      */
-    export async function getAvailableCourses(ctx: Koa.Context) {
+    export async function getAvailableCourses(ctx: Koa.Context, next: () => Promise<any>) {
+        await next();
+
         const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });
         ctx.body = await retrievedStudents[0].availableCourses();
     }
@@ -46,12 +52,8 @@ namespace StudentController {
      * 
      * @param ctx - the context of the koa middleware function
      */
-    export async function enrollInCourse(ctx: Koa.Context) {
-
-        // console.log(ctx.request);
-        // console.log(ctx.response);
-        // console.log(ctx.res);
-        console.log(ctx.request.body);
+    export async function enrollInCourse(ctx: Koa.Context, next: () => Promise<any>) {
+        await next();
 
         // retrieve the specified courses
         const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });

@@ -40,12 +40,12 @@ Get a list of all the courses that are available to a student
 
 Attempt to enroll a student in a given course. 
 
-#####Parameters:
+##### Parameters:
 
 - **student_id** the id of the student we want to enroll in the course
 - **course_id** the id of the course we want to enroll the student in
 
-#####Statuses:
+##### Statuses:
 
 - **405** The student is not allowed to enroll in the given course
 - **409** The student is already enrolled in the given course

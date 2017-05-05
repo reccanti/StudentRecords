@@ -52,12 +52,14 @@ namespace StudentController {
      */
     export async function enrollInCourse(ctx: Koa.Context, next: () => Promise<any>) {
 
+
+        await next();
+        console.log(ctx.request.body);
         // retrieve the specified courses
-        const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });
-        const retrievedCourses: Course[] = await Course.get({ id: ctx.params.course_id });
+        const retrievedStudents: Student[] = await Student.get({ id: ctx.request.body.student_id });
+        const retrievedCourses: Course[] = await Course.get({ id: ctx.request.body.course_id });
         const student = retrievedStudents[0];
         const course = retrievedCourses[0];
-
         /*
          * Check to see if the student is allowed to enroll in
          * the given course. Throw a 405 response if not (Method Not
@@ -74,11 +76,12 @@ namespace StudentController {
          * Check to see if the student is already enrolled in the
          * given course. Throw a 409 response if they are (Conflict Error)
          */
-        else if (course.isEnrolled(student)) {
+        else if (await course.isEnrolled(student)) {
             ctx.status = 409
             ctx.body = {
                 message: `${student.first} ${student.last} is already enrolled in ${course.name}.`
             }
+
         }
 
         /*
@@ -86,13 +89,13 @@ namespace StudentController {
          * (Resource Created)
          */
         else {
+            const val = await student.enroll(course);
+            console.log(val);
             ctx.status = 201;
             ctx.body = {
                 message: `${student.first} ${student.last} has been enrolled in ${course.name}!`
             }
         }
-
-        await next();
 
     }
 }

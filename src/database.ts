@@ -1,5 +1,5 @@
 import * as knex from 'knex';
-import MockClient from '../test_helpers/MockClient';
+import MockClient from './MockClient';
 
 let client;
 

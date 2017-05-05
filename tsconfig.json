@@ -6,12 +6,12 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "noImplicitReturns": true,
-        "lib": ["es2017"]
+        "lib": ["es2017", "dom"]
     },
     "include": [
         "src/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules", "test_helpers"
     ]
 }

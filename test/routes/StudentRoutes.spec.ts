@@ -203,7 +203,43 @@ describe('Student Routes', function () {
                             done();
                         }
                     });
-            })
+            });
+
+            it('should respond with 201 after the student is enrolled in the course', function (done) {
+                // stub out the necessary request
+                const studentStub = sinon.stub(Student, 'get').resolves([
+                    new Student(1, 'Test First', 'Test Last', 1)
+                ]);
+                const courseStub = sinon.stub(Course, 'get').resolves([
+                    new Course(1, 'Test Course', 1)
+                ]);
+                const enrolledStub = sinon.stub(Course.prototype, 'getEnrolled').resolves([]);
+
+                request(app.listen())
+                    .post('/api/student/enroll')
+                    .send({ 
+                        "id": "1", 
+                        "course_id": "1" 
+                    })
+                    .expect(201)
+                    .expect('Content-Type', /json/)
+                    .end(function (err, res) {
+
+                        // restore stubs
+                        studentStub.restore();
+                        courseStub.restore();
+                        enrolledStub.restore();
+
+                        // check for error
+                        if(err) {
+                            done(err);
+                        }
+                        else {
+                            expect(res.body.message).to.not.be.null;
+                            done();
+                        }
+                    });
+            });
         });
     })
 });

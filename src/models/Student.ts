@@ -93,4 +93,17 @@ export default class Student implements IStudent {
             throw err;
         }
     }
+
+    /**
+     * Enroll the student in a given course
+     * 
+     * @param course - The course we want to enroll the student in
+     */
+    async enroll(course: Course) {
+        try {
+            return await client.insert({Student_id: this.id, Courses_id: course.id}).into('Enrollment');
+        } catch (err) {
+            throw err;
+        }
+    }
 }

@@ -13,15 +13,14 @@ namespace StudentController {
      * @param ctx - the context of the koa middleware function
      */
     export async function getById(ctx: Koa.Context, next: () => Promise<any>) {
-        await next();
-
         const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });
         if (retrievedStudents.length > 0) {
             ctx.body = retrievedStudents[0];
         } else {
             ctx.status = 404;
             ctx.message = "record not found";
-        }
+        }        
+        await next();
     }
 
     /**
@@ -30,9 +29,8 @@ namespace StudentController {
      * @param ctx - the context of the koa middleware function
      */
     export async function getAll(ctx: Koa.Context, next: () => Promise<any>) {
-        await next();
-
         ctx.body = await Student.get();
+        await next();
     }
 
     /**
@@ -41,10 +39,10 @@ namespace StudentController {
      * @param ctx - the context of the koa middleware function
      */
     export async function getAvailableCourses(ctx: Koa.Context, next: () => Promise<any>) {
-        await next();
-
         const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });
         ctx.body = await retrievedStudents[0].availableCourses();
+        
+        await next();
     }
 
     /**
@@ -53,7 +51,6 @@ namespace StudentController {
      * @param ctx - the context of the koa middleware function
      */
     export async function enrollInCourse(ctx: Koa.Context, next: () => Promise<any>) {
-        await next();
 
         // retrieve the specified courses
         const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });
@@ -77,7 +74,7 @@ namespace StudentController {
          * Check to see if the student is already enrolled in the
          * given course. Throw a 409 response if they are (Conflict Error)
          */
-        else if (!course.isEnrolled(student)) {
+        else if (course.isEnrolled(student)) {
             ctx.status = 409
             ctx.body = {
                 message: `${student.first} ${student.last} is already enrolled in ${course.name}.`
@@ -94,6 +91,9 @@ namespace StudentController {
                 message: `${student.first} ${student.last} has been enrolled in ${course.name}!`
             }
         }
+
+        await next();
+
     }
 }
 

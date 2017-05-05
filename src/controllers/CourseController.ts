@@ -12,8 +12,6 @@ namespace CourseController {
      * @param ctx - the Koa context of the middleware function
      */
     export async function getById(ctx: Koa.Context, next: () => Promise<any>) {
-        await next();
-
         const retrievedCourses: Course[] = await Course.get({ id: ctx.params.id });
         if (retrievedCourses.length > 0) {
             ctx.body = retrievedCourses[0];
@@ -21,6 +19,7 @@ namespace CourseController {
             ctx.status = 404;
             ctx.message = "record not found";
         }
+        await next();
     }
 
     /**
@@ -29,9 +28,8 @@ namespace CourseController {
      * @param ctx - the Koa context of the middleware function
      */
     export async function getAll(ctx: Koa.Context, next: () => Promise<any>) {
-        await next();
-
         ctx.body = await Course.get();
+        await next();
     }
 
     /**
@@ -40,10 +38,9 @@ namespace CourseController {
      * @param ctx - the Koa context of the middleware function
      */
     export async function getEnrolledStudents(ctx: Koa.Context, next: () => Promise<any>) {
-        await next();
-        
         const retrievedCourses: Course[] = await Course.get({ id: ctx.params.id });
         ctx.body = await retrievedCourses[0].getEnrolled();
+        await next();
     }
 }
 

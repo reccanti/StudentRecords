@@ -77,7 +77,6 @@ class Course implements ICourse {
         const students = await this.getEnrolled({
             'Enrollment.Student_id': student.id
         });
-        console.log(students.filter(curStudent => curStudent.id === student.id).length);
         return students.filter(curStudent => curStudent.id === student.id).length > 0;
     }
 

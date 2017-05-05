@@ -178,7 +178,6 @@ describe('Student Routes', function () {
                 const enrolledStub = sinon.stub(Course.prototype, 'getEnrolled').resolves([
                     new Student(1, 'Test First', 'Test Last', 1)
                 ]);
-
                 request(app.listen())
                     .post('/api/student/enroll')
                     .send({ 
@@ -214,6 +213,7 @@ describe('Student Routes', function () {
                     new Course(1, 'Test Course', 1)
                 ]);
                 const enrolledStub = sinon.stub(Course.prototype, 'getEnrolled').resolves([]);
+                const insertStub = sinon.stub(Student.prototype, 'enroll').resolves(['1']);
 
                 request(app.listen())
                     .post('/api/student/enroll')
@@ -229,6 +229,7 @@ describe('Student Routes', function () {
                         studentStub.restore();
                         courseStub.restore();
                         enrolledStub.restore();
+                        insertStub.restore();
 
                         // check for error
                         if(err) {

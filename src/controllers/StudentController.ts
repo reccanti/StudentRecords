@@ -51,10 +51,7 @@ namespace StudentController {
      * @param ctx - the context of the koa middleware function
      */
     export async function enrollInCourse(ctx: Koa.Context, next: () => Promise<any>) {
-
-
         await next();
-        console.log(ctx.request.body);
         // retrieve the specified courses
         const retrievedStudents: Student[] = await Student.get({ id: ctx.request.body.student_id });
         const retrievedCourses: Course[] = await Course.get({ id: ctx.request.body.course_id });
@@ -90,7 +87,6 @@ namespace StudentController {
          */
         else {
             const val = await student.enroll(course);
-            console.log(val);
             ctx.status = 201;
             ctx.body = {
                 message: `${student.first} ${student.last} has been enrolled in ${course.name}!`

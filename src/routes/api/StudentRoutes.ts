@@ -18,4 +18,9 @@ studentRoutes.get('/:id', StudentController.getById);
  */
 studentRoutes.get('/:id/availableCourses', StudentController.getAvailableCourses);
 
+/**
+ * Attempt to enroll a student in a given course
+ */
+studentRoutes.post('/enroll/', StudentController.enrollInCourse);
+
 export default studentRoutes;

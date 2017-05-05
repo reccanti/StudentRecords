@@ -1,4 +1,5 @@
 import * as Router from 'koa-router';
+import * as bodyparser from 'koa-bodyparser';
 import apiRoutes from './api'
 
 const routes = new Router();

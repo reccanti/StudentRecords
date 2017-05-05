@@ -14,6 +14,9 @@
   },
   "devDependencies": {
     "@types/chai": "^3.5.1",
+    "@types/koa": "^2.0.39",
+    "@types/koa-bodyparser": "^3.0.23",
+    "@types/koa-router": "^7.0.22",
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.13",
     "@types/supertest": "^2.0.0",
@@ -29,10 +32,9 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
-    "@types/koa": "^2.0.39",
-    "@types/koa-router": "^7.0.22",
     "knex": "^0.12.9",
     "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.1.1",
     "mariasql": "^0.2.6"
   },

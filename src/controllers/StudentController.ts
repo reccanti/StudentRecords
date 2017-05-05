@@ -48,26 +48,50 @@ namespace StudentController {
      */
     export async function enrollInCourse(ctx: Koa.Context) {
 
+        // console.log(ctx.request);
+        // console.log(ctx.response);
+        // console.log(ctx.res);
+        console.log(ctx.request.body);
+
         // retrieve the specified courses
         const retrievedStudents: Student[] = await Student.get({ id: ctx.params.id });
         const retrievedCourses: Course[] = await Course.get({ id: ctx.params.course_id });
         const student = retrievedStudents[0];
         const course = retrievedCourses[0];
 
-        // test if the student is not allowed to enroll in the course
+        /*
+         * Check to see if the student is allowed to enroll in
+         * the given course. Throw a 405 response if not (Method Not
+         * Allowed Error)
+         */
         if (!student.canEnroll(course)) {
             ctx.status = 405;
             ctx.body = {
-                message: `${course.name} does not allow students in ${student.first} ${student.last}'s major`
+                message: `${course.name} does not allow students in ${student.first} ${student.last}'s major.`
             }
         }
 
-        // test if the student is already enrolled in the course
-        if (!course.isEnrolled(student)) {
+        /*
+         * Check to see if the student is already enrolled in the
+         * given course. Throw a 409 response if they are (Conflict Error)
+         */
+        else if (!course.isEnrolled(student)) {
             ctx.status = 409
+            ctx.body = {
+                message: `${student.first} ${student.last} is already enrolled in ${course.name}.`
+            }
         }
 
-        // enroll the student in the course
+        /*
+         * Enroll the Student in the Course and return a 201 response
+         * (Resource Created)
+         */
+        else {
+            ctx.status = 201;
+            ctx.body = {
+                message: `${student.first} ${student.last} has been enrolled in ${course.name}!`
+            }
+        }
     }
 }
 

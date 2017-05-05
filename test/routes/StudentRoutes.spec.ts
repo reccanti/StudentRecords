@@ -1,9 +1,18 @@
 const chai = require('chai');
 const request = require('supertest');
 
+let sinon = require('sinon');
+// require('sinon-as-promised');
+
 import isRealValue from '../../test_helpers/isRealValue';
 import client from '../../src/database';
 import app from '../../src/server';
+
+// const Student = require('../../src/models/Student').default;
+// const Course = require('../../src/models/Course').default;
+
+import Student from '../../src/models/Student';
+import Course from '../../src/models/Course';
 
 const expect = chai.expect;
 
@@ -122,7 +131,32 @@ describe('Student Routes', function () {
         });
 
         describe('enrollInCourse', function() {
-            it('should throw an error if the student cannot enroll in the given course', function () {
+            it('should throw a 405 error if the student cannot enroll in the given course', function (done) {
+
+                const studentStub = sinon.stub(Student, 'get').resolves([
+                    new Student(1, 'Test First', 'Test Last', 1)
+                ]);
+                const courseStub = sinon.stub(Course, 'get').resolves([
+                    new Course(1, 'Test Course', 2)
+                ]);
+
+                request(app.listen())
+                    .post('/api/student/enroll')
+                    .send({ 
+                        "id": 1, 
+                        "course_id": 1 
+                    })
+                    .expect(405)
+                    .expect('Content-Type', /json/)
+                    .end(function (err, res) {
+
+                        expect(res.body.message).to.not.be.null;
+
+                        studentStub.restore();
+                        courseStub.restore();
+
+                        done();
+                    });
 
             });
         });

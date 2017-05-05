@@ -54,13 +54,20 @@ namespace StudentController {
         const student = retrievedStudents[0];
         const course = retrievedCourses[0];
 
-        // the student is not allowed to enroll in the course
+        // test if the student is not allowed to enroll in the course
         if (!student.canEnroll(course)) {
             ctx.status = 405;
             ctx.body = {
                 message: `${course.name} does not allow students in ${student.first} ${student.last}'s major`
             }
         }
+
+        // test if the student is already enrolled in the course
+        if (!course.isEnrolled(student)) {
+            ctx.status = 409
+        }
+
+        // enroll the student in the course
     }
 }
 

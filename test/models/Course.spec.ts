@@ -4,6 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 import isRealValue from '../../test_helpers/isRealValue';
 import client from '../../src/database';
 import Course from '../../src/models/Course';
+import Student from '../../src/models/Student';
 
 // initialize chai
 chai.use(chaiAsPromised);
@@ -121,6 +122,40 @@ describe('Course', function() {
                 expect(students.length).to.equal(0);
                 done();
 
+            }).catch(done);
+        });
+    });
+
+
+    describe('isEnrolled', function() {
+        
+        it ('should return true if the student is enrolled in the course', function (done) {
+            
+            // setup the database
+            client.setData([
+                { Major_id: 1, Student_id: 1, 'Enrollment.Major_id': 1, 'Enrollment.Student_id': 1, First: 'Test First', Last: 'Test Last' }
+            ]);
+
+            const testStudent = new Student(1, 'Test First', 'Test Last', 1);
+            const testCourse = new Course(1, 'Test Course', 1);
+            testCourse.isEnrolled(testStudent).then(function (isEnrolled) {
+                expect(isEnrolled).to.be.true;
+                done();
+            }).catch(done);
+        });
+        
+        it('should return false if the student is not enrolled in the course', function (done) {
+            
+            // setup the database
+            client.setData([
+                { Major_id: 1, Student_id: 2, 'Enrollment.Major_id': 1, 'Enrollment.Student_id': 2, First: 'Test First', Last: 'Test Last' }
+            ]);
+
+            const testStudent = new Student(1, 'Test First', 'Test Last', 1);
+            const testCourse = new Course(1, 'Test Course', 2);
+            testCourse.isEnrolled(testStudent).then(function (isEnrolled) {
+                expect(isEnrolled).to.be.false;
+                done()
             }).catch(done);
         });
     });

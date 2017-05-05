@@ -12,6 +12,17 @@ interface ICourseQueryParams {
 }
 
 /**
+ * An interface that describes the different
+ * parameters that can be used to search the database
+ */
+interface IEnrollmentQueryParams {
+    'Enrollment.Student_id'?: number;
+    Student_id?: number;
+    'Enrollment.Major_id'?: number;
+    Major_id?: number;
+}
+
+/**
  * An interface that defines the shape of a Course object
  */
 interface ICourse {
@@ -46,14 +57,27 @@ class Course implements ICourse {
     /**
      * Get a list of students who are enrolled in the current course
      */
-    async getEnrolled(): Promise<Student[]> {
+    async getEnrolled(whereOptions: IEnrollmentQueryParams = {}): Promise<Student[]> {
+        const options = Object.assign({}, { 'Enrollment.Courses_id': this.id }, whereOptions);
         const students = await client.select()
             .from('Enrollment')
             .join('Student', { 'Enrollment.Student_id':'Student.id' })
-            .where({ 'Enrollment.Courses_id': this.id });
+            .where(options);
         return students.map( enrolled => {
             return new Student(enrolled.Student_id, enrolled.First, enrolled.Last, enrolled.Major_id);
         });
+    }
+
+    /**
+     * Checks to see if a given student is enrolled in the course
+     * 
+     * @param student - The Student who we want to check is in the course
+     */
+    async isEnrolled(student: Student): Promise<boolean> {
+        const students = await this.getEnrolled({
+            'Enrollment.Student_id': student.id
+        });
+        return students.filter(curStudent => curStudent.id === student.id).length > 0;
     }
 
     /**
